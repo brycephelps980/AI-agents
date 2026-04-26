@@ -1,0 +1,78 @@
+# ─────────────────────────────────────────────────────────────
+#  AI-Agents Configuration
+#  Copy .env.example → .env and set ANTHROPIC_API_KEY first.
+# ─────────────────────────────────────────────────────────────
+
+# Obsidian vault integration
+obsidian:
+  vault_path: "/home/user/ObsidianVault"   # Absolute path to your vault root
+  agent_folder: "AI-Agents"                 # Subfolder written by all agents
+
+# Topics the Research Assistant and Trend Forecaster focus on
+agents:
+  topics_of_interest:
+    - "artificial intelligence"
+    - "Python programming"
+    - "productivity systems"
+    - "technology trends"
+
+  news_scout:
+    search_queries:
+      - "AI news today"
+      - "tech industry news"
+      - "science discoveries today"
+    max_articles: 10
+
+  research_assistant:
+    max_topics_per_run: 3      # Cap to control API cost
+    search_depth: 5             # max_results per search query
+
+  task_manager:
+    reminder_days_ahead: 2      # Warn about todos due within N days
+    max_todos_in_briefing: 10
+
+  content_strategist:
+    ideas_per_run: 5
+    platforms:
+      - "blog"
+      - "twitter"
+      - "youtube"
+
+  trend_forecaster:
+    forecast_weeks_ahead: 4
+    max_searches: 5
+
+  memory_keeper:
+    lookback_days: 7            # How many days of past notes to read
+
+# Schedule (uses 24-hour HH:MM format)
+schedule:
+  overnight_run_time: "02:00"
+  timezone: "America/New_York"
+  midday_todo_reminder: true
+  midday_run_time: "12:00"
+
+# Safety configuration
+safety:
+  max_iterations_per_agent: 15
+  agent_timeout_seconds: 300     # 5 minutes per agent
+  max_tokens_per_run: 500000     # Hard cost cap (~$1.50 at Sonnet pricing)
+  max_file_size_chars: 50000     # ~50 KB per note
+  vault_write_allowed_subdir: "AI-Agents"
+  secret_patterns:
+    - "sk-ant-"
+    - "Bearer "
+    - "api_key="
+    - "API_KEY="
+  guardian_enabled: true
+
+# Third-party integrations (disabled until API credentials are provided)
+integrations:
+  openclaw:
+    enabled: false
+    base_url: "https://api.openclaw.example.com"
+    timeout_seconds: 30
+  antigravity:
+    enabled: false
+    base_url: "https://api.antigravity.example.com"
+    timeout_seconds: 30
